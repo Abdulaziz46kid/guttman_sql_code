@@ -7,7 +7,7 @@ SELECT 'ADDING USER rt_user' AS 'INSTALLATION PROGRESSING';
 
 CREATE USER
 IF NOT EXISTS 'rt_user'@'localhost'
-IDENTIFIED BY 'super_secert_pswd_911'
+IDENTIFIED BY 'super_secret_pswd_911'
 FAILED_LOGIN_ATTEMPTS 4
 PASSWORD_LOCK_TIME 10
 PASSWORD EXPIRE INTERVAL 90 DAY
@@ -16,8 +16,8 @@ PASSWORD REUSE INTERVAL 365 DAY;
 
 REVOKE ALL, GRANT OPTION FROM 'rt_user'@'localhost';
 
-GRANT ALL ON*.*
-TO 'rt_users'@'localhost';
+GRANT ALL ON *.*
+TO 'rt_user'@'localhost';
 
 SELECT user, Show_db_priv, account_locked
 FROM mysql.user;
@@ -33,7 +33,7 @@ SELECT 'ADDING USER brt_user' AS 'INSTALLATION PROGRESSING';
 
 CREATE USER
 IF NOT EXISTS 'brt_user'@'localhost'
-IDENTIFIED BY 'super_secert_pswd_911'
+IDENTIFIED BY 'super_secret_pswd_911'
 FAILED_LOGIN_ATTEMPTS 0
 PASSWORD_LOCK_TIME 0
 PASSWORD EXPIRE INTERVAL 90 DAY
@@ -43,7 +43,11 @@ PASSWORD REUSE INTERVAL 365 DAY;
 REVOKE ALL, GRANT OPTION FROM 'brt_user'@'localhost';
 
 GRANT ALL ON *.*
-TO 'brt_users'@'Localhost';
+TO 'brt_user'@'Localhost';
+
+SELECT 'COMPLETED' AS 'INSTALLATION DONE';
+
+FLUSH PRIVILEGES;
 
 SELECT user,host ,Show_db_priv,account_locked
 FROM mysql.user;
@@ -66,7 +70,7 @@ PASSWORD REUSE INTERVAL 365 DAY;
 REVOKE ALL , GRANT OPTION FROM 'admin_007'@'%';
 
 SELECT user , Show_db_priv , account_locked
-FROM sql.user1;
+FROM mysql.user;
 
 GRANT SELECT ON classicmodels.*
 TO 'admin_007'@'%';

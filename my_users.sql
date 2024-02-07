@@ -1,7 +1,7 @@
 DROP USER
 IF EXISTS  'admin_001'@'%';
 
-SELECT 'ADDING USER admin_001' AS 'INSTALLATION PROGRESSING' ;
+SELECT 'ADDING USER admin_001' AS 'INSTALLATION PROGRESSING';
 
 CREATE USER
 IF NOT EXISTS 'admin_001'@'%'
@@ -21,12 +21,26 @@ WITH
   PASSWORD HISTORY 5
   PASSWORD REUSE INTERVAL 365 DAY;
 
-REVOKE ALL , GRANT OPTION FROM 'admin_001'@'%';
+REVOKE ALL, GRANT OPTION FROM 'admin_001'@'%';
 
-SELECT user, show_db_priv, account_locked
+SELECT user,show_db_priv, account_locked
 FROM   mysql.user;
 
-FLUSH PRIVILLEGES;
+FLUSH PRIVILEGES;
 
 SELECT user, show_db_priv, account_locked
-FROM   mysql;
+FROM  mysql.user;
+
+-- DROP ROLES
+DROP ROLE
+IF EXISTS 'read_only_classicmodels_db'@'%';
+
+-- CHECK TO SEE GONE
+SELECT user,show_db_priv, account_locked
+FROM mysql.user;
+
+-- CREATE ROLE
+CREATE ROLE
+IF NOT EXISTS
+      'read_only_classicmodels_db','admin_user',
+      'read_only_employees_db','app_user';
